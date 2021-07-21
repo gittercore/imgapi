@@ -2,7 +2,7 @@ import flask
 from flask import request
 import urllib.request
 from PIL import Image
-from workers.slap.slap import slap
+from workers.facepalm.facepalm import facepalm
 
 app = flask.Flask(__name__)
 
@@ -16,7 +16,7 @@ def image():
     requestbody = request.get_json(force=True)
     return "404, not found", 404
 
-@app.route('/image/slap', methods=['POST'])
+@app.route('/image/facepalm', methods=['POST'])
 def image_slap():
     requestbody = request.get_json(force=True)
 
@@ -26,7 +26,7 @@ def image_slap():
         if (type(requestbody["avatarURL"]) is list):
             if len(requestbody["avatarURL"]) == 2:
                 if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0] and r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][1]:
-                        slap(requestbody["avatarURL"][0], requestbody["avatarURL"][1])
+                        facepalm(requestbody["avatarURL"][0], requestbody["avatarURL"][1])
                         return "200, OK", 200
     
     return "400, bad request", 400
