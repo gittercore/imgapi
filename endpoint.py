@@ -1,6 +1,8 @@
 import flask
 from flask import request
-
+import urllib.request
+from PIL import Image
+  
 app = flask.Flask(__name__)
 
 
