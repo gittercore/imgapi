@@ -1,10 +1,18 @@
 import flask
-from flask import request
+from flask import request, json
 import urllib.request
 from PIL import Image
 from workers.facepalm.facepalm import facepalm
+import os
+import logging
+
+logging.getLogger('werkzeug').disabled = True
 
 app = flask.Flask(__name__)
+
+os.environ['WERKZEUG_RUN_MAIN'] = 'true'
+
+id = 0
 
 
 @app.route('/', methods=['GET'])
@@ -26,8 +34,16 @@ def image_slap():
         if (type(requestbody["avatarURL"]) is list):
             if len(requestbody["avatarURL"]) == 2:
                 if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0] and r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][1]:
-                        facepalm(requestbody["avatarURL"][0], requestbody["avatarURL"][1])
-                        return "200, OK", 200
+                        global id 
+                        id += 1
+                        facepalm_result_data = facepalm(requestbody["avatarURL"][0], requestbody["avatarURL"][1], id)
+                        id_file.write(str(id))
+                        response = app.response_class(
+                            response = json.dumps(facepalm_result_data),
+                            status = 200, 
+                            mimetype = "application/json"
+                        )
+                        return response, 200
     
     return "400, bad request", 400
 
