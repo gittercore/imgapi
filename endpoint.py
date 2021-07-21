@@ -2,7 +2,8 @@ import flask
 from flask import request
 import urllib.request
 from PIL import Image
-  
+from workers.slap.slap import slap
+
 app = flask.Flask(__name__)
 
 
@@ -25,6 +26,7 @@ def image_slap():
         if (type(requestbody["avatarURL"]) is list):
             if len(requestbody["avatarURL"]) == 2:
                 if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0] and r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][1]:
+                        slap(requestbody["avatarURL"][0], requestbody["avatarURL"][1])
                         return "200, OK", 200
     
     return "400, bad request", 400
