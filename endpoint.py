@@ -37,7 +37,6 @@ def image_slap():
                         global id 
                         id += 1
                         facepalm_result_data = facepalm(requestbody["avatarURL"][0], requestbody["avatarURL"][1], id)
-                        id_file.write(str(id))
                         response = app.response_class(
                             response = json.dumps(facepalm_result_data),
                             status = 200, 
