@@ -33,11 +33,11 @@ def image_slap():
     
     if avatarURL:
         if (type(requestbody["avatarURL"]) is list):
-            if len(requestbody["avatarURL"]) == 2:
+            if len(requestbody["avatarURL"]) == 1:
                 if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0] and r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][1]:
                         global id 
                         id += 1
-                        facepalm_result_data = facepalm(requestbody["avatarURL"][0], requestbody["avatarURL"][1], id)
+                        facepalm_result_data = facepalm(requestbody["avatarURL"][0], id)
                         response = app.response_class(
                             response = json.dumps(facepalm_result_data),
                             status = 200, 
@@ -55,11 +55,11 @@ def image_punch():
     
     if avatarURL:
         if (type(requestbody["avatarURL"]) is list):
-            if len(requestbody["avatarURL"]) == 2:
+            if len(requestbody["avatarURL"]) == 1:
                 if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0] and r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][1]:
                         global id 
                         id += 1
-                        punch_result_data = punch(requestbody["avatarURL"][0], requestbody["avatarURL"][1], id)
+                        punch_result_data = punch(requestbody["avatarURL"][0], id)
                         response = app.response_class(
                             response = json.dumps(punch_result_data),
                             status = 200, 

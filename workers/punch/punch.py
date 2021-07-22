@@ -3,13 +3,11 @@ import base64
 import os
 from PIL import Image
 
-def punch(target: str, caller: str, id: int):
+def punch(caller: str, id: int):
     try:
         caller_avatar_raw = Image.open(requests.get(caller, stream=True).raw)
-        target_avatar_raw = Image.open(requests.get(target, stream=True).raw)
     
         caller_avatar = caller_avatar_raw.resize((100,100), Image.ANTIALIAS)
-        target_avatar = target_avatar_raw.resize((64,64), Image.ANTIALIAS)
     
         template = Image.open("templates/punch.png")
     
