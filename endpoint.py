@@ -4,7 +4,6 @@ import urllib.request
 from PIL import Image
 from workers.facepalm.facepalm import facepalm
 from workers.punch.punch import punch
-from workers.hug.hug import hug
 import os
 import logging
 
@@ -63,28 +62,6 @@ def image_punch():
                         punch_result_data = punch(requestbody["avatarURL"][0], requestbody["avatarURL"][1], id)
                         response = app.response_class(
                             response = json.dumps(punch_result_data),
-                            status = 200, 
-                            mimetype = "application/json"
-                        )
-                        return response, 200
-    
-    return "400, bad request", 400
-
-@app.route('/image/hug', methods=['POST'])
-def image_hug():
-    requestbody = request.get_json(force=True)
-
-    avatarURL = "avatarURL" in requestbody
-    
-    if avatarURL:
-        if (type(requestbody["avatarURL"]) is list):
-            if len(requestbody["avatarURL"]) == 2:
-                if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0] and r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][1]:
-                        global id 
-                        id += 1
-                        hug_result_data = hug(requestbody["avatarURL"][0], requestbody["avatarURL"][1], id)
-                        response = app.response_class(
-                            response = json.dumps(hug_result_data),
                             status = 200, 
                             mimetype = "application/json"
                         )

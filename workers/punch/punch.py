@@ -18,7 +18,6 @@ def punch(target: str, caller: str, id: int):
         result.save(f"out/punch{id}.png")
     
         encoded = base64.b64encode(open(f"{os.getcwd()}/out/punch{id}.png", "rb").read()).decode()
-        result.show()
         if os.path.exists(f"out/punch{id}.png"):
             os.remove(f"out/punch{id}.png")
         return {

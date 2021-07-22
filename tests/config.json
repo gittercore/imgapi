@@ -1,0 +1,16 @@
+{
+    "facepalm": {
+        "input": [
+            "https://cdn.discordapp.com/avatars/665488298533322762/fbcfbd26a8b93472763e3fd3ca0e014f.webp?size=256",
+            "https://cdn.discordapp.com/avatars/665488298533322762/fbcfbd26a8b93472763e3fd3ca0e014f.webp?size=256"
+        ], 
+        "expected_output_file": "premade/facepalm.txt"
+    },
+    "punch": {
+        "input": [
+            "https://cdn.discordapp.com/avatars/665488298533322762/fbcfbd26a8b93472763e3fd3ca0e014f.webp?size=256",
+            "https://cdn.discordapp.com/avatars/665488298533322762/fbcfbd26a8b93472763e3fd3ca0e014f.webp?size=256"
+        ], 
+        "expected_output_file": "premade/punch.txt"
+    }
+}
