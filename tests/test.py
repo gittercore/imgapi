@@ -17,7 +17,7 @@ class TestWorkers(unittest.TestCase):
         with open(f"{os.getcwd()}/config.json") as f:
             data = json.load(f)
         punch = self.module_from_file("hug", "../workers/punch/punch.py")
-        self.assertEqual(bool(punch.punch(data["punch"]["input"][0],data["punch"]["input"][1],1)), True)
+        self.assertEqual(bool(punch.punch(data["punch"]["input"][0],1)), True)
 
 if __name__ == '__main__':
     unittest.main()
