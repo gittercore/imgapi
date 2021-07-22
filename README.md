@@ -19,3 +19,9 @@ The request body would be as follows:
 ```
 The response will be a `data` url, which when decoded will be
 ![idk](https://cdn.discordapp.com/attachments/834456504903663626/867358176243351592/unknown.png)
+
+# Support
+Support for use of the API can be found at the discord server [`discord.gg/n7EQSvGPax`](https://discord.gg/n7EQSvGPax)
+
+## Disclaimer
+We will not provide support for self hosting of the API
