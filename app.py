@@ -1,4 +1,3 @@
-import flask
 from flask import request, json
 import urllib.request
 from PIL import Image
@@ -6,10 +5,20 @@ from workers.facepalm.facepalm import facepalm
 from workers.punch.punch import punch
 import os
 import logging
+from flask import Flask
+from threading import Thread
+
+app = Flask('')
+
+
+def run():
+  app.run(host='0.0.0.0',port=8080)
+
+
 
 logging.getLogger('werkzeug').disabled = True
 
-app = flask.Flask(__name__)
+app = Flask(__name__)
 
 os.environ['WERKZEUG_RUN_MAIN'] = 'true'
 
@@ -34,7 +43,7 @@ def image_slap():
     if avatarURL:
         if (type(requestbody["avatarURL"]) is list):
             if len(requestbody["avatarURL"]) == 1:
-                if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0] and r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][1]:
+                if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0]:
                         global id 
                         id += 1
                         facepalm_result_data = facepalm(requestbody["avatarURL"][0], id)
@@ -56,7 +65,7 @@ def image_punch():
     if avatarURL:
         if (type(requestbody["avatarURL"]) is list):
             if len(requestbody["avatarURL"]) == 1:
-                if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0] and r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][1]:
+                if r"https://cdn.discordapp.com/avatars/" in requestbody["avatarURL"][0]:
                         global id 
                         id += 1
                         punch_result_data = punch(requestbody["avatarURL"][0], id)
@@ -72,6 +81,11 @@ def image_punch():
 @app.errorhandler(400)
 def bad_request(e):
     return "400, bad request", 400
-
+    
 print("running app")
 app.run()
+
+
+def start_flask_app():  
+    t = Thread(target=run)
+    t.start()
